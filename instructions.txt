@@ -182,7 +182,8 @@ a.	Exit the shell and in meterpreter…
 b.	Type: clearev
 
 ******************************************************************************
-NOTE: I’ve tried using the command del *.log /a /s /q /f but no luck while services are running…the one above forces all to be deleted.
+NOTE: I’ve tried using the command del *.log /a /s /q /f but no luck while services are running…the one above forces all to be
+deleted.
 ******************************************************************************
 
 
