@@ -7,8 +7,8 @@ Update: 20190921
 **********************************************
 
 DISCLAIMER
-1. These steps are for educational purposes only and for use at your own network laboratory. If you use these steps without consent
-from the network owner, you’re on your own.
+1. These steps are for educational purposes only and for use at your own network laboratory. If you use these steps without
+consent from the network owner, you’re on your own.
 
 2. I am not responsible for any issues/damages to hardware or software by using any of the software mentioned in this guide or
 damages by following the steps…do so at your own risk. I have tested these steps myself and found no issues/damage to my own
