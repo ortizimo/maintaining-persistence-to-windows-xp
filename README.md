@@ -1,1 +1,1 @@
-# metasploit-to-windows-xp
+# metasploit: maintaining persistence in windows xp
