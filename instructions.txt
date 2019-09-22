@@ -1,6 +1,6 @@
 **********************************************
 Straightforward Training™
-Using Maintaining Persistence in Windows XP (Step #2)
+Metasploit: Maintaining Persistence in Windows XP (Step #2)
 Author: Saulo S. Ortiz
 Date: 20190918
 Update: 20190921
