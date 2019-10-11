@@ -210,14 +210,13 @@ Next stop…using your new account to log in remotely! Stay tuned!
 EXERCISE QUESTIONS:
 Here are some Windows questions for you…
 
-1.	What was the command in meterpreter to find out your current location?
+1. What was the command in meterpreter to find out your current location?
 
-2.	What is the command to rename a file?
+2. What is the command to rename a file?
 
-3.	What is the command to delete a file or folder?
+3. What is the command to delete a file or folder?
 
-4.	What is the option to force delete a folder that contains files?
-
+4. What is the option to force delete a folder that contains files?
 
 SHORT/REFRESHER
 ATTACK:
